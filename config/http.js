@@ -8,7 +8,9 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
-var express = require('express')
+var express = require('express');
+var webpack = require('webpack');
+var config = require('../webpack.config');
 
 module.exports.http = {
 
@@ -62,7 +64,12 @@ module.exports.http = {
     // }
 
   customMiddleware: function (app) {
-    app.use('/', express.static(process.cwd() + '/dist'));
+    var compiler = webpack(config);
+    app.use(require("webpack-dev-middleware")(compiler, {
+      noInfo: true, publicPath: config.output.publicPath
+    }));
+
+    app.use(require("webpack-hot-middleware")(compiler));
   },
 
 

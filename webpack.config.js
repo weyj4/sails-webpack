@@ -3,7 +3,10 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
-  entry: './src/js/index',
+  entry: [
+    'webpack-hot-middleware/client',
+    './src/js/index'
+  ],
   output: {
     path: __dirname + '/.tmp/public/js',
     filename: 'bundle.js'
