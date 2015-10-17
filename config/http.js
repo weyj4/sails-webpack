@@ -8,6 +8,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
+var express = require('express')
 
 module.exports.http = {
 
@@ -30,23 +31,24 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    // order: [
-    //   'startRequestTimer',
-    //   'cookieParser',
-    //   'session',
-    //   'myRequestLogger',
-    //   'bodyParser',
-    //   'handleBodyParserError',
-    //   'compress',
-    //   'methodOverride',
-    //   'poweredBy',
-    //   '$custom',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    //   '404',
-    //   '500'
-    // ],
+  order: [
+    'startRequestTimer',
+    'cookieParser',
+    'customMiddleware',
+    'session',
+    'myRequestLogger',
+    'bodyParser',
+    'handleBodyParserError',
+    'compress',
+    'methodOverride',
+    'poweredBy',
+    '$custom',
+    'router',
+    'www',
+    'favicon',
+    '404',
+    '500'
+  ],
 
   /****************************************************************************
   *                                                                           *
@@ -58,6 +60,10 @@ module.exports.http = {
     //     console.log("Requested :: ", req.method, req.url);
     //     return next();
     // }
+
+  customMiddleware: function (app) {
+    app.use('/', express.static(process.cwd() + '/dist'));
+  },
 
 
   /***************************************************************************

@@ -3,9 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
-  entry: './src/index',
+  entry: './src/js/index',
   output: {
-    path: __dirname + '/static/',
+    path: __dirname + '/.tmp/public/js',
     filename: 'bundle.js'
   },
   plugins: [
@@ -14,7 +14,8 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['babel'], include: path.join(__dirname, 'src') }
+      { test: /\.js$/, loaders: ['babel'], include: path.join(__dirname, 'src') },
+      { test: /\.css$/, loader: 'style!css' }
     ]
   }
 };
