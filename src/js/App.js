@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { NICE, SUPER_NICE } from './colors';
+import Radium from 'radium';
 import '../styles/index.css';
 
+@Radium
 class Counter extends Component {
   constructor(props) {
     super(props);
@@ -21,19 +22,32 @@ class Counter extends Component {
 
   render() {
     return (
-      <h1 style={{ color: this.props.color }}>
+      <h1 style={styles.base}>
         Counter ({this.props.increment}): {this.state.counter}
       </h1>
     );
   }
 }
 
+var styles = {
+  base: {
+    background: 'mintCream',
+    color: 'mediumBlue',
+    border: '2px dashed blue',
+    borderRadius: 50,
+    padding: '1em',
+    ':hover': {
+      background: 'khaki'
+    }
+  }
+};
+
 export class App extends Component {
   render() {
     return (
-      <div className="counter">
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
+      <div>
+        <Counter increment={1} />
+        <Counter increment={5} />
       </div>
     );
   }
