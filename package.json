@@ -32,6 +32,9 @@
     "start": "node devServer.js",
     "lint": "eslint src"
   },
+  "scripts": {
+    "start": "webpack && sails lift"
+  },
   "main": "app.js",
   "repository": {
     "type": "git",
